@@ -6,78 +6,81 @@ import InputComponent from "./InputComponent";
 import { Link } from "react-router-dom";
 import CartNavbar from "./CartNavbar";
 import Logo from "../../../../assets/Carewell.png";
-import { SlWallet } from "react-icons/sl";
+import ConnectButton from './ConnectButton'
+import { useSelector } from "react-redux";
 
 // import {
 //   Button,
 //   Text,
 // } from "@chakra-ui/react";
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 
 
 const TopNavbar = () => {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
-  const [walletAddress, setwalletAddress] = useState("");
-  useEffect(() => {
-      getCurrentWalletConnected();
-      addWalletListener();
-  });
+//   const [walletAddress, setwalletAddress] = useState("");
+//   useEffect(() => {
+//       getCurrentWalletConnected();
+//       addWalletListener();
+//   });
 
-  const connectWallet = async () => {
-    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
-        try {
-            //Metamask is installed
-            const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-            setwalletAddress(accounts[0]);
-            console.log(accounts[0]);
-        } catch (err) {
-            console.log(err.message);
-        }
-    } else {
-        //Metamask is not installed
-        console.log("Please install wallet");
-    }
+//   const connectWallet = async () => {
+//     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+//         try {
+//             //Metamask is installed
+//             const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+//             setwalletAddress(accounts[0]);
+//             console.log(accounts[0]);
+//         } catch (err) {
+//             console.log(err.message);
+//         }
+//     } else {
+//         //Metamask is not installed
+//         console.log("Please install wallet");
+//     }
 
-};
+// };
 
-const getCurrentWalletConnected = async () => {
-    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
-        try {
-            const accounts = await window.ethereum.request({ method: "eth_accounts" });
-            if(accounts.length > 0)
-            {
-                setwalletAddress(accounts[0]);
-                console.log(accounts[0]);
-            }
-            else 
-            {
-                console.log("Connect to MetaMask using the connect button")
-            }
-        } catch (err) {
-            console.log(err.message);
-        }
-    } else {
-        //Metamask is not installed
-        console.log("Please install wallet");
-    }
+// const getCurrentWalletConnected = async () => {
+//     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+//         try {
+//             const accounts = await window.ethereum.request({ method: "eth_accounts" });
+//             if(accounts.length > 0)
+//             {
+//                 setwalletAddress(accounts[0]);
+//                 console.log(accounts[0]);
+//             }
+//             else 
+//             {
+//                 console.log("Connect to MetaMask using the connect button")
+//             }
+//         } catch (err) {
+//             console.log(err.message);
+//         }
+//     } else {
+//         //Metamask is not installed
+//         console.log("Please install wallet");
+//     }
 
-};
+// };
 
-const addWalletListener = async () => {
-    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
-        window.ethereum.on("accountsChanged", (accounts) =>
-        {
-            setwalletAddress(accounts[0]);
-            console.log(accounts[0]);
-        });
+// const addWalletListener = async () => {
+//     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+//         window.ethereum.on("accountsChanged", (accounts) =>
+//         {
+//             setwalletAddress(accounts[0]);
+//             console.log(accounts[0]);
+//         });
         
-    } else {
-        //Metamask is not installed
-        setwalletAddress("");
-        console.log("Please install wallet");
-    }
+//     } else {
+//         //Metamask is not installed
+//         setwalletAddress("");
+//         console.log("Please install wallet");
+//     }
 
-};
+// };
+
   return (
     <>
       <Box top="0px" position="fixed" width={"100%"} zIndex="1">
@@ -108,8 +111,9 @@ const addWalletListener = async () => {
               <CartNavbar />
             </Link>
 
-            {/* <UserButton /> */}
-            <Button
+            {isLoggedIn ? <ConnectButton /> : null}
+            <UserButton />
+            {/* <Button
               bgColor={"rgb(50,174,177)"}
               _hover={{ bg: "rgb(50,174,177)" }}
               size="md"
@@ -120,7 +124,7 @@ const addWalletListener = async () => {
                 {walletAddress && walletAddress.length > 0 ? `Connected: ${walletAddress.slice(0,9)}` : "Connect Wallet"}
                 </Text>
               </Flex>
-            </Button>
+            </Button> */}
           </Flex>
         </Container>
       </Box>

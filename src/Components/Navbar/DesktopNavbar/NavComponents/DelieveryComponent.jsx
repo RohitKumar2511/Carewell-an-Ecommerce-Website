@@ -2,7 +2,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  Container,
+  // Container,
   Flex,
   Menu,
   MenuButton,
@@ -10,9 +10,27 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const Delievery = () => {
-  const location = null;
+  const [postalCode, setPostalCode] = useState(null);
+
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(position => {
+      // Getting latitude & longitude from position obj 
+      const { latitude, longitude } = position.coords; 
+      // Getting location of passed coordinates using geocoding API
+      const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+      // console.log(longitude, latitude);
+
+      fetch(url).then(res => res.json()).then(data => {
+        // console.log(data.address.postcode);
+        setPostalCode(data.address.postcode);
+      }).catch(() => {
+        console.log("Error fetching data from API");
+      });
+    });
+  },[])
   return (
     <Box>
       <Menu
@@ -44,7 +62,7 @@ const Delievery = () => {
                   textColor={"rgb(50,174,177)"}
                   pl="4px"
                 >
-                  {location ? location : "110002"}
+                  {postalCode ? postalCode : "Postcode Not found"}
                 </Text>
               </Flex>
             </MenuButton>

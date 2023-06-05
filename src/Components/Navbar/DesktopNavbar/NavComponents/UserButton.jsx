@@ -38,7 +38,9 @@ const UserButton = () => {
     <Box
       bgColor={"rgb(50,174,177)"}
       _hover={{ bg: "rgb(50,174,177)" }}
-      size="xs"
+      size="md"
+      borderRadius="5px"
+      padding="4px"
     >
       <Link
         to={"/Login"}
@@ -50,7 +52,7 @@ const UserButton = () => {
             <MenuButton
               fontSize="14px"
               size="sm"
-              p={"0px"}
+              pl={"2px"}
               isActive={isOpen}
               colorScheme="rgb(50,174,177)"
               as={Button}

@@ -117,17 +117,14 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
                    <Image  w='42px' h='42px'
                     src="https://www.netmeds.com/assets/pgicon/Sbi.png"
                     alt="Product Img"
-                  />
-
-
-                
+                  />              
                  
               </Flex>
 
               <Box>
               <Select placeholder='More Banks' w="40%">
                <option value='option1'>Axis Bank</option>
-                <option value='option2'>HDFC Bank</option>
+               <option value='option2'>HDFC Bank</option>
                <option value='option3'>ICICI Bank</option>
                <option value='option3'>State Bank Of India</option>
                <option value='option3'>PNB Bank</option>
@@ -242,7 +239,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
 
             {
-                                    promoCodeDiscount==0? <Box></Box> : 
+                                    promoCodeDiscount===0? <Box></Box> : 
                                     <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
                                         <Text>Promocode Discount</Text>
                                         <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>

@@ -7,40 +7,24 @@ import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/ico
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 
-
-var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
-// var userDetails=JSON.parse(localStorage.getItem("userDetails"))
-
-
-
-
-// async function GetData(){
-//   const key="";
-//   // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";
-//    const url=`https://netmedsdata.onrender.com/cart`;
-// try{
-//     const res= await fetch(url)
-//     const data=await res.json();
-//     //  console.log(data);
-//     return data;
-// }
-// catch(err){
-//    console.log("err",err);
-// }
-
-// }
-
-
-
-
-
-
-
-
-
 export const OrderReview = () => {
-
-  
+  // async function GetData(){
+  //     const key="";
+  //     // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";
+  //     const url=`https://netmedsdata.onrender.com/cart`;
+  //   try{
+  //         const res= await fetch(url)
+  //         const data=await res.json();
+  //         //  console.log(data);
+  //         return data;
+  //     }
+  //     catch(err){
+  //         console.log("err",err);
+  //       }
+        
+  // }
+  // var userDetails=JSON.parse(localStorage.getItem("userDetails"))
+  var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
 
   const[userDetails,setuserDetails]=React.useState(JSON.parse(localStorage.getItem("userDetails")));
   const[page,setPage]=React.useState(1);
@@ -49,13 +33,13 @@ export const OrderReview = () => {
 
   // const{FirstName,LastName,Address,Landmark,Phonenumber,City,State,PinCode}=userAddressdata;
 
-    React.useEffect(()=>{
-        // Data1()
-        // cartDataPrice()
-        // cartData()
-        // console.log("calling useeffect")
-        getData();
-    },[])
+  React.useEffect(()=>{
+      // Data1()
+      // cartDataPrice()
+      // cartData()
+      // console.log("calling useeffect")
+      getData();
+  },[])
 
 
     // const Data1=async ()=>{
@@ -74,7 +58,7 @@ export const OrderReview = () => {
 
 // console.log(posts.title);
 
-const[Productprice,setProductprice]=React.useState('');
+  const[Productprice,setProductprice]=React.useState('');
 
 // let TotalPrice=0;
 
@@ -92,48 +76,27 @@ const[Productprice,setProductprice]=React.useState('');
 //     // console.log("heee",Productprice);
 // }
 
+  const navigateToDetails = useNavigate();
 
+  const handleNavigate = () => {
+    navigateToDetails('/payment/details');
+  }
 
+  const ProductData={
+    DeliveryDate:"19-October-2022",
+  }
 
+  const DELIVERYADDRESS={
+    ...userAddress,
+  }
 
+  const Username={
+    ...userDetails
+  }
 
-
-const navigateToDetails = useNavigate();
-const handleNavigate = () => {
-  navigateToDetails('/payment/details');
-
-}
-
-
-const ProductData={
-  
-  DeliveryDate:"19-October-2022",
-
-}
-
-
-
-
-
-
-const DELIVERYADDRESS={
-  
-  
-  ...userAddress,
-
-
-
-}
-
-const Username={
-  ...userDetails
-}
-
-
-const PaymentDetails={
-  
-  Discount:0,
-}
+  const PaymentDetails={
+    Discount:0,
+  }
 
 
 
@@ -144,8 +107,8 @@ const PaymentDetails={
   return (
     <Box mt="20px">
       {
-                    loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
-                }
+        loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
+      }
     <OrderStatus/>
     <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='10px'  >
     
@@ -194,13 +157,9 @@ const PaymentDetails={
            
     )
     )}
-
-
             </Box>
 
-
-
-            <Box   padding='10px' mb='60px' id='boxshadow'>
+            <Box padding='10px' mb='60px' id='boxshadow'>
               <Flex justifyContent="space-between" >
                 <Text fontSize='12px' color='rgba(21,27,57,.6)' mb='10px'>DELIVERY ADDRESS</Text>
                 <Text fontSize='16px' color='#ef4281' ><SlideAddress/></Text>
@@ -208,37 +167,30 @@ const PaymentDetails={
 
               <Box >
                 <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{Username.firstName +" "+Username.lastName}</Text>
-                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
+                  {(Object.keys(DELIVERYADDRESS).length !== 0) && <>
+                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '100%' }} fontSize='14px'>
                     {DELIVERYADDRESS.Address+" "+DELIVERYADDRESS.Landmark}
-                    
                     </Text>
 
-                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
+                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '100%' }} fontSize='14px'>
                     
-                    {DELIVERYADDRESS.City+"   "+DELIVERYADDRESS.State+"   "+DELIVERYADDRESS.PinCode+" "}
-                    
-                    </Text>
-                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
-                    
-                    {DELIVERYADDRESS.Phonenumber+"   "}
+                    {DELIVERYADDRESS.City+" "+DELIVERYADDRESS.State+" "+DELIVERYADDRESS.PinCode+" "}
                     
                     </Text>
+                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '100%' }} fontSize='14px'>
+                    
+                    {DELIVERYADDRESS.Phonenumber+" "}
+                    
+                    </Text>
+                  </>}
               </Box>
             </Box>
-
-
-
 
             <Box  padding='10px'mb='60px' id='boxshadow' >
               <Text color='rgba(21,27,57,.6)' fontSize='12px'  mb='20px'>Customer Notes</Text>
               <textarea style={{padding: '5px', border: '2px solid #32aeb1', borderRadius: '5px', color:'#32aeb1'}} name="paragraph_text" cols="70" rows="5" placeholder="Leave your comment..." ></textarea>
             </Box>
           </Box>
-
-
-
-
-
 
 
         </SimpleGrid>
@@ -259,20 +211,20 @@ const PaymentDetails={
               <Text>- Rs.{discount.toFixed(2)}</Text>
             </Flex>
             {
-                                    promoCodeDiscount==0? <Box></Box> : 
-                                    <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
-                                        <Text>Promocode Discount</Text>
-                                        <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>
-                                    </Flex>
-                                }
+                promoCodeDiscount===0? <Box></Box> : 
+                <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                    <Text>Promocode Discount</Text>
+                    <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>
+                </Flex>
+            }
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{(totalMRP-discount).toFixed(2)}</Text>
+              <Text >*Rs.{(totalMRP-discount).toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
-              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.{(discount+promoCodeDiscount).toFixed(2)}</Text>
+              <Text color='#378f30' fontSize='14px'>TOTAL SAVINGS RS.{(discount+promoCodeDiscount).toFixed(2)}</Text>
             </Box>
 
             <Flex justifyContent='space-between' mt='30px'>
@@ -298,10 +250,6 @@ const PaymentDetails={
 
             </Flex>
           </Box>
-
-
-
-
 
       </Box>
     </Box>
