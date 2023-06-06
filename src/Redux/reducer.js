@@ -8,6 +8,7 @@ import {
   REMOVECART,
   RESETLOGIN,
   CHANGELOGINSTATUS,
+  SAVEWALLETADDRESS
 } from "./action";
 
 const initState = {
@@ -17,7 +18,9 @@ const initState = {
   mobileView: false,
   isLoggedIn: JSON.parse(localStorage.getItem("userDetails")) || false,
   userDetails: JSON.parse(localStorage.getItem("userDetails")) || [],
+  walletAddress: ""
 };
+
 function reducer(state = initState, { type, payload }) {
   switch (type) {
     case LOADINGSTATE: {
@@ -25,6 +28,10 @@ function reducer(state = initState, { type, payload }) {
     }
     case ERRORSTATE: {
       return { ...state, loading: false, error: true, cart: [] };
+    }
+    
+    case SAVEWALLETADDRESS:{
+      return { ...state, walletAddress: payload };
     }
 
     case SETCART: {

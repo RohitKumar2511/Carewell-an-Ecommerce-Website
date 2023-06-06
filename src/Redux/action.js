@@ -7,6 +7,7 @@ export const EMPTYCART = "EMPTYCART";
 export const REMOVECART = "REMOVECART"
 export const RESETLOGIN="RESETLOGIN"
 export const CHANGELOGINSTATUS="CHANGELOGINSTATUS"
+export const SAVEWALLETADDRESS="SAVEWALLETADDRESS" 
 
 export const loadingState = () => ({
   type: LOADINGSTATE,
@@ -40,4 +41,10 @@ export const changeLoginStatus = (data) => ({
   type: CHANGELOGINSTATUS,
   payload:data
 })
+
+export const saveWalletAddress = (data) => ({
+  type: SAVEWALLETADDRESS,
+  payload:data
+})
+
 
