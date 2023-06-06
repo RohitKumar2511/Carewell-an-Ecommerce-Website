@@ -18,7 +18,8 @@ const initState = {
   mobileView: false,
   isLoggedIn: JSON.parse(localStorage.getItem("userDetails")) || false,
   userDetails: JSON.parse(localStorage.getItem("userDetails")) || [],
-  walletAddress: ""
+  walletAddress: "",
+  recipientAddress: "0x0dE4c0750BBE1886544D07E8B3394860Fa8dDDa6" // reciever address
 };
 
 function reducer(state = initState, { type, payload }) {
