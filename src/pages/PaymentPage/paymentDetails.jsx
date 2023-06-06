@@ -19,7 +19,7 @@ export const PymentDetails = () => {
   const { totalMRP, discount, promoCodeDiscount, getData, cartData, loading } = useContext(AppContext);
 
   const PayButton = (el) => {
-    console.log(Change)
+    // console.log(Change)
     return (
       <Box>
         <Button
@@ -49,7 +49,8 @@ export const PymentDetails = () => {
     getData()
   }, [])
 
-  const walletAddress = useSelector(state => state.walletAddress);
+  const recieverAddress = useSelector(state => state.recipientAddress);
+  // console.log(recieverAddress);
 
   return (
     <Box mt="20px">
@@ -81,11 +82,11 @@ export const PymentDetails = () => {
                     <Text fontSize='14px' fontWeight="bold">LTN</Text>
                   </Flex>
                   {/* <Checkbox size='md' colorScheme='green' ></Checkbox> */}
+                  <PayButton />
                 </Flex>
                 <Box>
-                  <Text fontSize='14px' ml='15px'>Recipient Address</Text>
-                  <Input value={walletAddress} disabled />
-                  <PayButton />
+                  {/* <Text fontSize='14px' ml='15px'>Recipient Address</Text> */}
+                  {/* <Input value={recieverAddress} disabled /> */}
                 </Box>
               </Box>
 
